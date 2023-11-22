@@ -29,6 +29,9 @@ public class UserService {
     public AuthResponse createNewUser(CreateUserDto createUserDto) {
         User newUser = User.builder()
                 .email(createUserDto.getEmail())
+                .firstName(createUserDto.getFirstName())
+                .lastName(createUserDto.getLastName())
+                .address(createUserDto.getAddress())
                 .password(passwordEncoder.encode(createUserDto.getPassword()))
                 .balance(createUserDto.getBalance())
                 .role(createUserDto.getRole())
