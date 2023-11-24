@@ -2,6 +2,7 @@ package org.banksystem.BankSystem.services;
 
 import lombok.RequiredArgsConstructor;
 import org.banksystem.BankSystem.Entity.Transaction;
+import org.banksystem.BankSystem.Enum.TransactionStatus;
 import org.banksystem.BankSystem.Repository.TransactionRepository;
 import org.banksystem.BankSystem.Repository.UserRepository;
 import org.banksystem.BankSystem.dto.PostNewTransaction;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TransactionService {
     private final TransactionRepository transactionRepository;
+    private final TransactionProcessingService transactionProcessingService;
     private final UserRepository userRepository;
     public List<Transaction> getAllTransactions(){
         return transactionRepository.findAll();
@@ -28,8 +30,11 @@ public class TransactionService {
         transaction.setAmount(newTransaction.getAmount());
         transaction.setFromAccount(newTransaction.getFromAccount());
         transaction.setToAccount(newTransaction.getToAccount());
+        transaction.setStatus(TransactionStatus.PENDING);
         transaction.setUser(userRepository.findById(newTransaction.getFromAccount()).orElseThrow());
-        return transactionRepository.save(transaction);
+        Transaction savedTransaction = transactionRepository.save(transaction);
+        transactionProcessingService.processTransaction(savedTransaction.getId());
+        return savedTransaction;
     }
 
     public Optional<Transaction> getTransactionById(Integer id) {

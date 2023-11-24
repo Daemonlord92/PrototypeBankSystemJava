@@ -1,6 +1,6 @@
 package org.banksystem.BankSystem.Entity;
 
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,12 +9,18 @@ import org.banksystem.BankSystem.Enum.HireStatus;
 import org.banksystem.BankSystem.Enum.UserRole;
 
 @Data
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "application")
 public class Application {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String email;
     private UserRole role;
     private HireStatus status;
+
+
 }
