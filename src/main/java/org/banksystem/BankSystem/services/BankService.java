@@ -14,14 +14,5 @@ public class BankService {
     private final BankRepository bankRepository;
     private final ApplicationRepository applicationRepository;
 
-    public ApplicationSuccessfulResponse applyForBankPosition(PostNewApplication postNewApplication) {
-        Application application = Application.builder()
-                .email(postNewApplication.getEmail())
-                .role(postNewApplication.getRole())
-                .build();
-        applicationRepository.save(application);
-        return ApplicationSuccessfulResponse.builder()
-                .message("Application is successful!")
-                .build();
-    }
+
 }

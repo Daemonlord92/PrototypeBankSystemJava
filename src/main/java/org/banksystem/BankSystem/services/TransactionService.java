@@ -1,5 +1,6 @@
 package org.banksystem.BankSystem.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.banksystem.BankSystem.Entity.Transaction;
 import org.banksystem.BankSystem.Enum.TransactionStatus;
@@ -38,7 +39,11 @@ public class TransactionService {
     }
 
     public Optional<Transaction> getTransactionById(Integer id) {
-        return transactionRepository.findById(id);
+        Optional<Transaction> transaction = transactionRepository.findById(id);
+        if(transaction.isEmpty()) {
+            throw new EntityNotFoundException("Transaction not found");
+        }
+        return transaction;
     }
 
     public List<Transaction> getAllTransactionsByUserId(Integer id) {

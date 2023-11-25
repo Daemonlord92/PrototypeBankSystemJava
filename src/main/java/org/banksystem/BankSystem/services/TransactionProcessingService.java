@@ -1,5 +1,6 @@
 package org.banksystem.BankSystem.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.banksystem.BankSystem.Entity.Transaction;
 import org.banksystem.BankSystem.Entity.User;
 import org.banksystem.BankSystem.Enum.TransactionStatus;
@@ -22,7 +23,7 @@ public class TransactionProcessingService {
     }
 
     @Async
-    public CompletableFuture<Void> processTransaction(Integer id) {
+    public void processTransaction(Integer id) {
         try {
             Thread.sleep(5 * 60 * 1000);
         } catch (InterruptedException e) {
@@ -30,11 +31,12 @@ public class TransactionProcessingService {
         }
 
         Optional<Transaction> transaction = transactionRepository.findById(id);
+        if (transaction.isEmpty()) {
+            throw new EntityNotFoundException("Transaction not found");
+        }
         if(TransactionStatus.PENDING.equals(transaction.get().getStatus())) {
             processTransactionLogic(transaction.get());
         }
-
-        return CompletableFuture.completedFuture(null);
     }
 
     private void processTransactionLogic(Transaction transaction) {

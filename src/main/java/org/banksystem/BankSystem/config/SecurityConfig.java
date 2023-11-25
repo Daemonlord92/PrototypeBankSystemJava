@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**")
                 .permitAll()
-                .requestMatchers("/bank/apply", "/bank/application/**")
+                .requestMatchers("/applications/apply", "/applications/application/**")
                 .hasAnyAuthority("ROLE_CLIENT",
                         "ROLE_TELLER",
                         "ROLE_MANAGER",

@@ -65,6 +65,9 @@ public class UserService {
 
     public String terminateEmployee(Integer id) {
         Optional<User> user = userRepository.findById(id);
+        if(user.isEmpty()) {
+            throw new EntityNotFoundException("User not found");
+        }
         user.get().setHired(false);
         user.get().setRole(UserRole.ROLE_CLIENT);
         userRepository.save(user.get());

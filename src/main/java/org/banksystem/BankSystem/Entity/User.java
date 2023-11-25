@@ -33,6 +33,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Transaction> transactions;
 
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
+    private Bank bank;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name().toString()));
