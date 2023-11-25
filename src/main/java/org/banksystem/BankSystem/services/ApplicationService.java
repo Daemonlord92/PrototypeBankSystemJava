@@ -35,4 +35,8 @@ public class ApplicationService {
         }
         return "Update Successful";
     }
+
+    public Optional<Application> getApplicationById(Integer id) {
+        return applicationRepository.findById(id);
+    }
 }

@@ -8,10 +8,10 @@ import org.banksystem.BankSystem.services.ApplicationService;
 import org.banksystem.BankSystem.services.BankService;
 import org.banksystem.BankSystem.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bank")
@@ -31,9 +31,14 @@ public class BankController {
         return ResponseEntity.ok(bankService.applyForBankPosition(postNewApplication));
     }
 
-    @GetMapping("/bank/")
+    @GetMapping("/")
     public ResponseEntity<List<Application>> getAllApplication() {
         return ResponseEntity.ok(applicationService.getAllApplications());
+    }
+
+    @GetMapping("/application/{id}")
+    public ResponseEntity<Optional<Application>> getApplicationStatus(@PathVariable(value = "id") Integer id) {
+        return ResponseEntity.ok(applicationService.getApplicationById(id));
     }
 
     @PutMapping("/update")
