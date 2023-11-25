@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -27,6 +26,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**", "/bank/")
                 .permitAll()
+                .requestMatchers("/bank/apply")
+                .hasAnyAuthority("ROLE_CLIENT", "ROLE_TELLER", "ROLE_MANAGER", "ROLE_ADMIN")
+                .requestMatchers("/bank/", "/bank/terminate")
+                .hasAnyAuthority("ROLE_MANAGER", "ROLE_ADMIN")
+                .requestMatchers("/transactions/userTransactions/**", "/transactions/**", "/transactions/transaction/**")
+                .hasAuthority("ROLE_CLIENT")
                 .anyRequest()
                 .authenticated()
                 .and()

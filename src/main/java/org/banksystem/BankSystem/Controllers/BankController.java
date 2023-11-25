@@ -31,20 +31,17 @@ public class BankController {
         return ResponseEntity.ok(bankService.applyForBankPosition(postNewApplication));
     }
 
-    @GetMapping("/")
-    @Secured({"MANAGER", "ADMIN"})
+    @GetMapping("/bank/")
     public ResponseEntity<List<Application>> getAllApplication() {
         return ResponseEntity.ok(applicationService.getAllApplications());
     }
 
     @PutMapping("/update")
-    @Secured({"MANAGER", "ADMIN"})
     public ResponseEntity<String> updateApplicationStatus(@RequestBody UpdateApplicationRequest updateApplicationRequest) {
         return ResponseEntity.ok(applicationService.updateApplicationStatus(updateApplicationRequest));
     }
 
     @PutMapping("/terminate")
-    @Secured({"MANAGER", "ADMIN"})
     public ResponseEntity<String> terminateEmployee(Integer id) {
         return ResponseEntity.ok(userService.terminateEmployee(id));
     }

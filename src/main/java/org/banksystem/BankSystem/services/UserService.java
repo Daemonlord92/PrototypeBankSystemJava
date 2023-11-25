@@ -65,7 +65,7 @@ public class UserService {
     public String terminateEmployee(Integer id) {
         Optional<User> user = userRepository.findById(id);
         user.get().setHired(false);
-        user.get().setRole(UserRole.CLIENT);
+        user.get().setRole(UserRole.ROLE_CLIENT);
         userRepository.save(user.get());
         return "Employee Terminated";
     }

@@ -42,6 +42,6 @@ public class TransactionService {
     }
 
     public List<Transaction> getAllTransactionsByUserId(Integer id) {
-        return transactionRepository.getTransactionByUserId(id);
+        return transactionRepository.getTransactionsByUserId(id);
     }
 }
