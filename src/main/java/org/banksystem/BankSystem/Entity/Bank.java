@@ -18,6 +18,6 @@ public class Bank {
     private String name;
     private Double balance;
 
-    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bank")
     private List<User> employees;
 }
