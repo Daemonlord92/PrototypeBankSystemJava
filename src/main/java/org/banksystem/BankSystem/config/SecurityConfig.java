@@ -24,14 +24,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**", "/bank/")
+                .requestMatchers("/auth/**")
                 .permitAll()
                 .requestMatchers("/bank/apply", "/bank/application/**")
                 .hasAnyAuthority("ROLE_CLIENT",
                         "ROLE_TELLER",
                         "ROLE_MANAGER",
                         "ROLE_ADMIN")
-                .requestMatchers("/bank/", "/bank/terminate")
+                .requestMatchers("/bank/",
+                        "/bank/terminate",
+                        "/transactions/allTransactions/")
                 .hasAnyAuthority("ROLE_MANAGER", "ROLE_ADMIN")
                 .requestMatchers("/transactions/userTransactions/**",
                         "/transactions/**",

@@ -1,5 +1,6 @@
 package org.banksystem.BankSystem.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.banksystem.BankSystem.Entity.User;
 import org.banksystem.BankSystem.Enum.UserRole;
@@ -8,7 +9,6 @@ import org.banksystem.BankSystem.config.JwtService;
 import org.banksystem.BankSystem.dto.AuthRequest;
 import org.banksystem.BankSystem.dto.AuthResponse;
 import org.banksystem.BankSystem.dto.CreateUserDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -68,5 +68,13 @@ public class UserService {
         user.get().setRole(UserRole.ROLE_CLIENT);
         userRepository.save(user.get());
         return "Employee Terminated";
+    }
+
+    public void deleteUser(Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        if(user.isEmpty()) {
+            throw new EntityNotFoundException("User Doesn't Exists");
+        }
+        userRepository.delete(user.get());
     }
 }

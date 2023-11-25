@@ -34,7 +34,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.createNewTransaction(newTransaction));
     }
 
-    @GetMapping("/")
+    @GetMapping("/allTransactions")
     public ResponseEntity<List<Transaction>> getAllTransactions() {
         return ResponseEntity.ok(transactionService.getAllTransactions());
     }
