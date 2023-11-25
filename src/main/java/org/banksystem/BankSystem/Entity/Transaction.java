@@ -19,7 +19,6 @@ public class Transaction {
     private Integer fromAccount;
     private Integer toAccount;
     public Long postDate;
-    //TODO Setup a Multithreading where the transaction is completed or failed after 5 minutes
     private TransactionStatus status;
     @ManyToOne
     @JoinColumn(name = "user_id")

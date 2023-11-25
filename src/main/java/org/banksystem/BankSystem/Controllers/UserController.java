@@ -2,6 +2,7 @@ package org.banksystem.BankSystem.Controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.banksystem.BankSystem.Entity.User;
+import org.banksystem.BankSystem.dto.UpdateUserProfileRequest;
 import org.banksystem.BankSystem.services.UserService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,11 @@ public class UserController {
     @GetMapping("/user/")
     public ResponseEntity<Optional<User>> getUserById(@RequestParam Integer id) {
         return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @PutMapping("/updateUserProfile")
+    public ResponseEntity<Optional<User>> updateUserProfile(@RequestBody UpdateUserProfileRequest request) {
+        return ResponseEntity.ok(userService.updateUser(request));
     }
 
     @DeleteMapping("/closeAccount/{id}")

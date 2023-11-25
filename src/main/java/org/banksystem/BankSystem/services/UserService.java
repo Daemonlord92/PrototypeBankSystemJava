@@ -9,6 +9,7 @@ import org.banksystem.BankSystem.config.JwtService;
 import org.banksystem.BankSystem.dto.AuthRequest;
 import org.banksystem.BankSystem.dto.AuthResponse;
 import org.banksystem.BankSystem.dto.CreateUserDto;
+import org.banksystem.BankSystem.dto.UpdateUserProfileRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -76,5 +77,20 @@ public class UserService {
             throw new EntityNotFoundException("User Doesn't Exists");
         }
         userRepository.delete(user.get());
+    }
+
+    public Optional<User> updateUser(UpdateUserProfileRequest request) {
+        Optional<User> user = userRepository.findById(request.getId());
+        if (user.isEmpty()) {
+            throw new EntityNotFoundException("User not found");
+        }
+        if (request.getAddress() != user.get().getAddress() || request.getAddress() != null) {
+            user.get().setAddress(request.getAddress());
+        }
+        String passHash = passwordEncoder.encode(request.getPassword());
+        if(passHash != user.get().getPassword()) {
+            user.get().setPassword(passHash);
+        }
+        return Optional.of(userRepository.save(user.get()));
     }
 }
