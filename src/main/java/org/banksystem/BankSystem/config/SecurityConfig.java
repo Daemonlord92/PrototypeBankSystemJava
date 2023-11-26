@@ -26,19 +26,21 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**")
                 .permitAll()
-                .requestMatchers("/applications/apply", "/applications/application/**")
-                .hasAnyAuthority("ROLE_CLIENT",
-                        "ROLE_TELLER",
+                .requestMatchers("/bank/**",
+                        "/transactions/allTransactions/",
+                        "/applications/update")
+                .hasAnyAuthority(
                         "ROLE_MANAGER",
                         "ROLE_ADMIN")
-                .requestMatchers("/bank/",
-                        "/bank/terminate",
-                        "/transactions/allTransactions/")
-                .hasAnyAuthority("ROLE_MANAGER", "ROLE_ADMIN")
+                .requestMatchers("/users/")
+                .hasAnyAuthority("ROLE_ADMIN",
+                        "ROLE_TELLER",
+                        "ROLE_MANAGER")
                 .requestMatchers("/transactions/userTransactions/**",
                         "/transactions/**",
                         "/transactions/transaction/**")
-                .hasAnyAuthority("ROLE_CLIENT",
+                .hasAnyAuthority(
+                        "ROLE_CLIENT",
                         "ROLE_TELLER",
                         "ROLE_MANAGER")
                 .anyRequest()
