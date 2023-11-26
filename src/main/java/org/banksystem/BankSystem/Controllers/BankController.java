@@ -41,4 +41,9 @@ public class BankController {
     public ResponseEntity<String> terminateEmployee(Integer id) {
         return ResponseEntity.ok(userService.terminateEmployee(id));
     }
+
+    @DeleteMapping("/deleteBank/{bankId}")
+    public ResponseEntity<String> deleteBank(@PathVariable Integer bankId) {
+        return ResponseEntity.ok(bankService.deleteBank(bankId));
+    }
 }
