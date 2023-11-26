@@ -8,13 +8,15 @@ import lombok.NoArgsConstructor;
 import org.banksystem.BankSystem.Enum.HireStatus;
 import org.banksystem.BankSystem.Enum.UserRole;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "application")
-public class Application {
+public class Application implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

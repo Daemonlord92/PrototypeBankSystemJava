@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.banksystem.BankSystem.Enum.TransactionStatus;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "transactions")
-public class Transaction {
+public class Transaction implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
