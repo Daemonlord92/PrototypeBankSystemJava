@@ -3,21 +3,20 @@ package org.banksystem.BankSystem.Controllers;
 import org.banksystem.BankSystem.Entity.Bank;
 import org.banksystem.BankSystem.Entity.User;
 import org.banksystem.BankSystem.dto.PostNewBankRequest;
-import org.banksystem.BankSystem.services.BankService;
-import org.banksystem.BankSystem.services.UserService;
+import org.banksystem.BankSystem.services.IBankService;
+import org.banksystem.BankSystem.services.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/bank")
 public class BankController {
-    private final UserService userService;
-    private final BankService bankService;
+    private final IUserService userService;
+    private final IBankService bankService;
 
-    public BankController(UserService userService, BankService bankService) {
+    public BankController(IUserService userService, IBankService bankService) {
         this.userService = userService;
         this.bankService = bankService;
     }

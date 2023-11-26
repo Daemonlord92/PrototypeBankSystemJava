@@ -2,9 +2,8 @@ package org.banksystem.BankSystem.Controllers;
 
 import org.banksystem.BankSystem.Entity.Transaction;
 import org.banksystem.BankSystem.dto.PostNewTransaction;
-import org.banksystem.BankSystem.services.TransactionService;
+import org.banksystem.BankSystem.services.ITransactionService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,9 +12,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
-    private final TransactionService transactionService;
+    private final ITransactionService transactionService;
 
-    public TransactionController(TransactionService transactionService) {
+    public TransactionController(ITransactionService transactionService) {
         this.transactionService = transactionService;
     }
 

@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class BankService {
+public class BankService implements IBankService {
     private final BankRepository bankRepository;
     private final ApplicationRepository applicationRepository;
     private final UserRepository userRepository;

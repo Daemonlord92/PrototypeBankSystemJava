@@ -16,9 +16,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class TransactionService {
+public class TransactionService implements ITransactionService {
     private final TransactionRepository transactionRepository;
-    private final TransactionProcessingService transactionProcessingService;
+    private final ITransactionProcessingService transactionProcessingService;
     private final UserRepository userRepository;
     public List<Transaction> getAllTransactions(){
         return transactionRepository.findAll();

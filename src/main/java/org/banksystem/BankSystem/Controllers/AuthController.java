@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.banksystem.BankSystem.dto.AuthRequest;
 import org.banksystem.BankSystem.dto.AuthResponse;
 import org.banksystem.BankSystem.dto.CreateUserDto;
-import org.banksystem.BankSystem.services.UserService;
+import org.banksystem.BankSystem.services.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final UserService userService;
+    private final IUserService userService;
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> postNewUser(@RequestBody CreateUserDto createUserDto) {
         return ResponseEntity.ok(userService.createNewUser(createUserDto));

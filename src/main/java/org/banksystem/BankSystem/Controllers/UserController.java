@@ -3,7 +3,7 @@ package org.banksystem.BankSystem.Controllers;
 import lombok.RequiredArgsConstructor;
 import org.banksystem.BankSystem.Entity.User;
 import org.banksystem.BankSystem.dto.UpdateUserProfileRequest;
-import org.banksystem.BankSystem.services.UserService;
+import org.banksystem.BankSystem.services.IUserService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
+    private final IUserService userService;
 
     @GetMapping("/")
     public ResponseEntity<List<User>> getAllUser() {

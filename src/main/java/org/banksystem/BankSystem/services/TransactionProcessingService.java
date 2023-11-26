@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class TransactionProcessingService {
+public class TransactionProcessingService implements ITransactionProcessingService {
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;
 

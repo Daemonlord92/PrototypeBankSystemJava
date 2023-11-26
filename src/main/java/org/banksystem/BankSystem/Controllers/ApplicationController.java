@@ -4,7 +4,7 @@ import org.banksystem.BankSystem.Entity.Application;
 import org.banksystem.BankSystem.dto.ApplicationSuccessfulResponse;
 import org.banksystem.BankSystem.dto.PostNewApplication;
 import org.banksystem.BankSystem.dto.UpdateApplicationRequest;
-import org.banksystem.BankSystem.services.ApplicationService;
+import org.banksystem.BankSystem.services.IApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +14,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/applications")
 public class ApplicationController {
-    private final ApplicationService applicationService;
+    private final IApplicationService applicationService;
 
-    public ApplicationController(ApplicationService applicationService) {
+    public ApplicationController(IApplicationService applicationService) {
         this.applicationService = applicationService;
     }
 
