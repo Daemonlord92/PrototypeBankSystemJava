@@ -69,6 +69,7 @@ public class UserService {
             throw new EntityNotFoundException("User not found");
         }
         user.get().setHired(false);
+        user.get().setBank(null);
         user.get().setRole(UserRole.ROLE_CLIENT);
         userRepository.save(user.get());
         return "Employee Terminated";

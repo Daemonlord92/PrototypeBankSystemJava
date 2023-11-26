@@ -21,7 +21,11 @@ public class ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final BankRepository bankRepository;
 
-    public ApplicationService(UserRepository userRepository, ApplicationRepository applicationRepository, BankRepository bankRepository) {
+    public ApplicationService(
+            UserRepository userRepository,
+            ApplicationRepository applicationRepository,
+            BankRepository bankRepository
+    ) {
         this.userRepository = userRepository;
         this.applicationRepository = applicationRepository;
         this.bankRepository = bankRepository;
@@ -43,7 +47,8 @@ public class ApplicationService {
     }
 
     public String updateApplicationStatus(UpdateApplicationRequest updateApplicationRequest) {
-        Optional<Application> application = Optional.of(applicationRepository.findById(updateApplicationRequest.getId()).orElseThrow(EntityNotFoundException::new));
+        Optional<Application> application = Optional.of(applicationRepository.findById(updateApplicationRequest.getId())
+                .orElseThrow(EntityNotFoundException::new));
         application.get().setStatus(updateApplicationRequest.getStatus());
         applicationRepository.save(application.get());
         if(updateApplicationRequest.getStatus().equals(HireStatus.HIRED)) {
