@@ -22,6 +22,5 @@
 
 ####Future Methods
 
-* COR implementation
 * Refresh Token
 
