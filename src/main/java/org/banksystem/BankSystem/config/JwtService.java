@@ -5,8 +5,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.banksystem.BankSystem.Entity.User;
+import org.banksystem.BankSystem.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -21,12 +23,19 @@ public class JwtService {
     @Autowired
     private JwtConfigProperty jwtConfigProperty;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Optional<User> user = userRepository.findByEmail(userDetails.getUsername());
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role", user.get().getRole().toString());
+        claims.put("firstName", user.get().getFirstName());
+        return generateToken(claims, userDetails);
     }
 
     public String generateToken(
