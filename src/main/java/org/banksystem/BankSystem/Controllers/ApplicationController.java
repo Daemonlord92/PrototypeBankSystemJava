@@ -30,6 +30,11 @@ public class ApplicationController {
         return ResponseEntity.ok(applicationService.getAllApplications());
     }
 
+    @GetMapping("/getApplicationsByUserEmail")
+    public ResponseEntity<List<Application>> getApplicationsByUserEmail(@RequestBody String email) {
+        return ResponseEntity.ok(applicationService.getApplicationsByUserEmail(email));
+    }
+
     @GetMapping("/application/{id}")
     public ResponseEntity<Optional<Application>> getApplicationStatus(@PathVariable(value = "id") Integer id) {
         return ResponseEntity.ok(applicationService.getApplicationById(id));

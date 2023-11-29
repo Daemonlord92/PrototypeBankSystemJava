@@ -66,4 +66,9 @@ public class ApplicationService implements IApplicationService {
         }
         return application;
     }
+
+    @Override
+    public List<Application> getApplicationsByUserEmail(String email) {
+        return applicationRepository.findByEmail(email);
+    }
 }

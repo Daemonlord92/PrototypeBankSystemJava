@@ -13,4 +13,6 @@ public interface IApplicationService {
     public List<Application> getAllApplications();
     public String updateApplicationStatus(UpdateApplicationRequest updateApplicationRequest);
     public Optional<Application> getApplicationById(Integer id);
+
+    List<Application> getApplicationsByUserEmail(String email);
 }

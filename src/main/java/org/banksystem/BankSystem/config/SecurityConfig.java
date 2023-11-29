@@ -28,7 +28,8 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers("/bank/**",
                         "/transactions/allTransactions/",
-                        "/applications/update")
+                        "/applications/update",
+                        "/applications/")
                 .hasAnyAuthority(
                         "ROLE_MANAGER",
                         "ROLE_ADMIN")
