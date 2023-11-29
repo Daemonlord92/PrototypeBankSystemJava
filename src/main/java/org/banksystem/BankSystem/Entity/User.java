@@ -31,8 +31,12 @@ public class User implements UserDetails, Serializable {
     private UserRole role;
     private float balance;
     private boolean hired;
+
     @OneToMany(mappedBy = "user")
     private Set<Transaction> transactions;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Application> applications;
 
     @ManyToOne
     @JoinColumn(name = "bank_id")

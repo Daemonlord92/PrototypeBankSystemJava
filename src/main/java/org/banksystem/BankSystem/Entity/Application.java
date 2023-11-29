@@ -26,5 +26,7 @@ public class Application implements Serializable {
     @Enumerated(EnumType.STRING)
     private HireStatus status;
 
-
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
