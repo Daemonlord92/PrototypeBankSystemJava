@@ -21,7 +21,9 @@ public class Application implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String email;
+    @Enumerated(EnumType.STRING)
     private UserRole role;
+    @Enumerated(EnumType.STRING)
     private HireStatus status;
 
 
