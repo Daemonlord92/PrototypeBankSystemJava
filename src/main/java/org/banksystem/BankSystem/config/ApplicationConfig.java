@@ -12,8 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.security.SecureRandom;
 
@@ -23,15 +21,6 @@ public class ApplicationConfig {
 
     private final UserRepository repository;
 
-    @Bean
-    public WebMvcConfigurer corConfig() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000", "https://localhost:3000");
-            }
-        };
-    }
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> repository.findByEmail(username)

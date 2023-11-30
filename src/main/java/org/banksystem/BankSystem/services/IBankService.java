@@ -5,10 +5,12 @@ import org.banksystem.BankSystem.Entity.User;
 import org.banksystem.BankSystem.dto.PostNewBankRequest;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IBankService {
     public Bank createNewBank(PostNewBankRequest postNewBankRequest);
     public List<Bank> getAllBanks();
     public List<User> getAllEmployeesByBankId(Integer bankId);
     public String deleteBank(Integer bankId);
+    Optional<Bank> getBankInfoById(Integer bankId);
 }

@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.persistence.EntityNotFoundException;
 import org.banksystem.BankSystem.Entity.User;
 import org.banksystem.BankSystem.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,13 @@ public class JwtService {
 
     public String generateToken(UserDetails userDetails) {
         Optional<User> user = userRepository.findByEmail(userDetails.getUsername());
+        if(user.isEmpty()) {
+            throw new EntityNotFoundException("User Not Found");
+        }
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", user.get().getRole().toString());
         claims.put("firstName", user.get().getFirstName());
+        claims.put("bankId", user.get().getBank().getId());
         return generateToken(claims, userDetails);
     }
 

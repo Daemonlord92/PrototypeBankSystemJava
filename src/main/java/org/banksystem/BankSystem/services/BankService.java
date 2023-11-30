@@ -56,4 +56,8 @@ public class BankService implements IBankService {
         bankRepository.delete(bank.get());
         return "Banks deleted";
     }
+
+    public Optional<Bank> getBankInfoById(Integer bankId) {
+        return bankRepository.findById(bankId);
+    }
 }

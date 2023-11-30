@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/bank")
 public class BankController {
     private final IUserService userService;
@@ -24,6 +26,11 @@ public class BankController {
     @PostMapping("/createNewBank")
     public ResponseEntity<Bank> postNewBank(PostNewBankRequest postNewBankRequest) {
         return ResponseEntity.ok(bankService.createNewBank(postNewBankRequest));
+    }
+
+    @GetMapping("/getBankInformation/{bankId}")
+    public ResponseEntity<Optional<Bank>> getBankInformation(@PathVariable Integer bankId) {
+        return ResponseEntity.ok(bankService.getBankInfoById(bankId));
     }
 
     @GetMapping("/allBanks")
